@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Theme tokens: change colors here, both modes ---------- */
+:root {
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --surface2: #e8ecf5;
+  --fg: #0f1b3d;
+  --muted: #5a6482;
+  --line: #d5dbea;
+  --brand: #0f1b3d;
+  --brandfg: #ffffff;
+  --accent: #ffb020;
+  --teal: #0e9384;
+  --alert: #e5484d;
+}
+.dark {
+  --bg: #0a0f1f;
+  --surface: #121a30;
+  --surface2: #1a2440;
+  --fg: #eaf0ff;
+  --muted: #96a0c0;
+  --line: #26315a;
+  --brand: #ffb020;
+  --brandfg: #0a0f1f;
+  --accent: #ffb020;
+  --teal: #2dd4bf;
+  --alert: #ff6b6b;
+}
+
+@theme inline {
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-sans: "Public Sans", sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brandfg: var(--brandfg);
+  --color-accent: var(--accent);
+  --color-teal: var(--teal);
+  --color-alert: var(--alert);
+}
+
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(color-mix(in srgb, var(--line) 80%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.6rem 1.1rem; border-radius: 0.65rem; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--fg);
+  transition: background 0.12s, transform 0.12s, filter 0.12s;
+}
+.btn:hover { background: var(--surface2); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-primary { background: var(--brand); color: var(--brandfg); border-color: var(--brand); }
+.btn-primary:hover { background: var(--brand); filter: brightness(1.12); }
+.btn-danger { color: var(--alert); border-color: var(--alert); }
+.btn-sm { padding: 0.35rem 0.75rem; font-size: 0.875rem; }
+
+.input {
+  width: 100%; padding: 0.65rem 0.85rem; border-radius: 0.65rem;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--fg);
+}
+.input::placeholder { color: var(--muted); }
+.label { display: block; font-weight: 600; margin-bottom: 0.35rem; font-size: 0.9rem; }
+.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 1rem; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.6rem;
+  border-radius: 999px; font-size: 0.78rem; font-weight: 600; background: var(--surface2);
+}
+
+/* One orchestrated entrance, used by the landing-page match demo */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0s); }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  * { transition: none !important; }
+}
